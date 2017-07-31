@@ -17,8 +17,8 @@
 	<section>
 		<div class="jumbotron">
 			<div class="container">
-				<h1>Products</h1>
-				<p>All the available products in our store</p>
+				<h1>Customers</h1>
+				<p>All our awesome customers</p>
 			</div>
 		</div>
 	</section>
@@ -29,10 +29,10 @@
 				<div class="col-sm-6 col-md-3" style="padding-bottom: 15 px">
 					<div class="thumbnail">
 						<div class="caption">
-							<h3>${customer.customerId}</h3>
-							<p>${customer.name}</p>
-							<p>${customer.address}</p>
-							<p>${customer.numberOfOrdersMade}</p>
+							<h3>Id: ${customer.customerId}</h3>
+							<p>Name: ${customer.name}</p>
+							<p>Address: ${customer.address}</p>
+							<p>Ordercount: ${customer.numberOfOrdersMade}</p>
 						</div>
 					</div>
 				</div>

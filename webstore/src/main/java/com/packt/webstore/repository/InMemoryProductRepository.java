@@ -2,7 +2,10 @@ package com.packt.webstore.repository;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
@@ -17,13 +20,13 @@ public class InMemoryProductRepository implements IProductRepository {
 		iphone.setDescription("Apple iPhone 5s smartphone with 4.00-inch 640x1136 display and 8-megapixel rear camera");
 		iphone.setCategory("Smart Phone");
 		iphone.setManufacturer("Apple");
-		iphone.setUnitsInStock(1000);
+		iphone.setUnitsInStock(800);
 
 		Product laptop_dell = new Product("P1235", "Dell Inspiron", new BigDecimal(700));
 		laptop_dell.setDescription("Dell Inspiron 14-inch Laptop (Black) with 3rd Generation Intel Core processors");
 		laptop_dell.setCategory("Laptop");
 		laptop_dell.setManufacturer("Dell");
-		laptop_dell.setUnitsInStock(1000);
+		laptop_dell.setUnitsInStock(500);
 
 		Product tablet_Nexus = new Product("P1236", "Nexus 7", new BigDecimal(300));
 		tablet_Nexus.setDescription(
@@ -35,6 +38,43 @@ public class InMemoryProductRepository implements IProductRepository {
 		listOfProducts.add(iphone);
 		listOfProducts.add(laptop_dell);
 		listOfProducts.add(tablet_Nexus);
+	}
+
+	@Override
+	public Set<Product> getProductsByFilter(Map<String, List<String>> filterparms) {
+		Set<Product> productsByBrand = new HashSet<>();
+		Set<Product> productsByCategory = new HashSet<>();
+		
+		Set<String> criterias = filterparms.keySet();
+		
+		if (criterias.contains("brand")) {
+			for (String brand : filterparms.get("brand")) {
+				for (Product product : listOfProducts) {
+					if (product.getManufacturer().equalsIgnoreCase(brand))
+						productsByBrand.add(product);
+				}
+			}
+		}
+			
+		if (criterias.contains("category")) {
+			for (String category : filterparms.get("category")) {
+				productsByCategory.addAll(getProductsByCategory(category));
+			}
+		}
+		
+		productsByBrand.retainAll(productsByCategory);
+		
+		return productsByBrand;
+	}
+
+	@Override
+	public List<Product> getProductsByCategory(String category) {
+		List<Product> listByCategory = new ArrayList<>();
+		for (Product product : listOfProducts) {
+			if (product.getCategory().equalsIgnoreCase(category))
+				listByCategory.add(product);
+		}
+		return listByCategory;
 	}
 
 	@Override
