@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,7 +12,7 @@ import com.packt.webstore.model.Show;
 import com.packt.webstore.service.IShowService;
 
 @RestController
-@RequestMapping("/show")
+@RequestMapping(value="/show", produces=MediaType.APPLICATION_JSON_VALUE)
 public class ShowController {
 	
 	// @Autowired
@@ -24,4 +25,16 @@ public class ShowController {
 		list.add(new Show("Game of Thrones", "Sci-fi"));
 		return list;
 	}
+	
+	@RequestMapping("/show")
+	public Show getshow() {
+		return new Show("Game of Thrones", "Sci-fi");
+	}
+	
+	@RequestMapping("/test")
+	public String test() {
+		return "test";
+	}
+	
+	
 }
