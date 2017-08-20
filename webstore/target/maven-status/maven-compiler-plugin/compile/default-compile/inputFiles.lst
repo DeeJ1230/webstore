@@ -1,0 +1,16 @@
+/Users/danjorgensen/git/webstore/webstore/src/main/java/com/packt/webstore/repository/IProductRepository.java
+/Users/danjorgensen/git/webstore/webstore/src/main/java/com/packt/webstore/service/CustomerServiceImpl.java
+/Users/danjorgensen/git/webstore/webstore/src/main/java/com/packt/webstore/service/OrderServiceImpl.java
+/Users/danjorgensen/git/webstore/webstore/src/main/java/com/packt/webstore/controller/OrderController.java
+/Users/danjorgensen/git/webstore/webstore/src/main/java/com/packt/webstore/repository/ICustomerRepository.java
+/Users/danjorgensen/git/webstore/webstore/src/main/java/com/packt/webstore/service/IOrderService.java
+/Users/danjorgensen/git/webstore/webstore/src/main/java/com/packt/webstore/controller/ProductController.java
+/Users/danjorgensen/git/webstore/webstore/src/main/java/com/packt/webstore/repository/InMemoryCustomerRepository.java
+/Users/danjorgensen/git/webstore/webstore/src/main/java/com/packt/webstore/service/ICustomerService.java
+/Users/danjorgensen/git/webstore/webstore/src/main/java/com/packt/webstore/repository/InMemoryProductRepository.java
+/Users/danjorgensen/git/webstore/webstore/src/main/java/com/packt/webstore/domain/Product.java
+/Users/danjorgensen/git/webstore/webstore/src/main/java/com/packt/webstore/service/ProductService.java
+/Users/danjorgensen/git/webstore/webstore/src/main/java/com/packt/webstore/controller/CustomerController.java
+/Users/danjorgensen/git/webstore/webstore/src/main/java/com/packt/webstore/controller/HomeController.java
+/Users/danjorgensen/git/webstore/webstore/src/main/java/com/packt/webstore/service/IProductService.java
+/Users/danjorgensen/git/webstore/webstore/src/main/java/com/packt/webstore/domain/Customer.java

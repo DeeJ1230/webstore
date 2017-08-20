@@ -17,6 +17,12 @@ public class ProductService implements IProductService {
 	private IProductRepository productRepository;
 	
 	@Override
+	public List<Product> getProductsByManufaturer(String category, Map<String, List<String>> filterparms,
+			String manufacturer) {
+		return productRepository.getProductsByManufaturer(category, filterparms, manufacturer);
+	}
+
+	@Override
 	public List<Product> listAllProducts() {
 		return productRepository.getAllProducts();
 	}

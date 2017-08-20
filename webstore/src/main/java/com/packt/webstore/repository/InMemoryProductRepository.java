@@ -1,6 +1,7 @@
 package com.packt.webstore.repository;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -41,12 +42,27 @@ public class InMemoryProductRepository implements IProductRepository {
 	}
 
 	@Override
+	public List<Product> getProductsByManufaturer(String category, Map<String, List<String>> filterparms,
+			String manufacturer) {
+		List<Product> result = new ArrayList<>();
+		
+		for (Product product : getProductsByCategory(category)) {
+			if (product.getManufacturer().equalsIgnoreCase(manufacturer)) {
+				if (product.getUnitPrice().compareTo(new BigDecimal(filterparms.get("low").get(0))) == 1 & product.getUnitPrice().compareTo(new BigDecimal(filterparms.get("high").get(0))) == -1)
+					result.add(product);
+			}
+		}
+		
+		return result;
+	}
+
+	@Override
 	public Set<Product> getProductsByFilter(Map<String, List<String>> filterparms) {
 		Set<Product> productsByBrand = new HashSet<>();
 		Set<Product> productsByCategory = new HashSet<>();
-		
+
 		Set<String> criterias = filterparms.keySet();
-		
+
 		if (criterias.contains("brand")) {
 			for (String brand : filterparms.get("brand")) {
 				for (Product product : listOfProducts) {
@@ -55,15 +71,15 @@ public class InMemoryProductRepository implements IProductRepository {
 				}
 			}
 		}
-			
+
 		if (criterias.contains("category")) {
 			for (String category : filterparms.get("category")) {
 				productsByCategory.addAll(getProductsByCategory(category));
 			}
 		}
-		
+
 		productsByBrand.retainAll(productsByCategory);
-		
+
 		return productsByBrand;
 	}
 
@@ -80,7 +96,8 @@ public class InMemoryProductRepository implements IProductRepository {
 	@Override
 	public Product getProductById(String productId) {
 		for (Product product : listOfProducts) {
-			if (product.getProductId().equals(productId)) return product;
+			if (product.getProductId().equals(productId))
+				return product;
 		}
 		throw new IllegalArgumentException("No products found with the Id: " + productId);
 	}
