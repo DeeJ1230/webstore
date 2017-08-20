@@ -1,5 +1,6 @@
 com/packt/webstore/controller/OrderController.class
 com/packt/webstore/service/ICustomerService.class
+<<<<<<< HEAD
 com/packt/webstore/controller/CustomerController.class
 com/packt/webstore/domain/Product.class
 com/packt/webstore/repository/InMemoryCustomerRepository.class
@@ -9,6 +10,20 @@ com/packt/webstore/service/IProductService.class
 com/packt/webstore/domain/Customer.class
 com/packt/webstore/repository/IProductRepository.class
 com/packt/webstore/controller/HomeController.class
+=======
+com/packt/webstore/service/IShowService.class
+com/packt/webstore/controller/CustomerController.class
+com/packt/webstore/domain/Product.class
+com/packt/webstore/repository/InMemoryCustomerRepository.class
+com/packt/webstore/service/IOrderService.class
+com/packt/webstore/model/Show.class
+com/packt/webstore/service/CustomerServiceImpl.class
+com/packt/webstore/service/IProductService.class
+com/packt/webstore/domain/Customer.class
+com/packt/webstore/repository/IProductRepository.class
+com/packt/webstore/controller/HomeController.class
+com/packt/webstore/controller/ShowController.class
+>>>>>>> branch 'master' of https://github.com/DeeJ1230/webstore.git
 com/packt/webstore/repository/ICustomerRepository.class
 com/packt/webstore/controller/ProductController.class
 com/packt/webstore/service/OrderServiceImpl.class
