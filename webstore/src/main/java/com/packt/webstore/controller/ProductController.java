@@ -27,8 +27,6 @@ public class ProductController {
 		return "products";
 	}
 	
-//	http://localhost:8080/webstore/products/tablet/price;low=200;high=400?manufacturer=Google
-	
 	@RequestMapping("/{category}/{price}")
 	public String getProductsByManufacturer(Model model, @PathVariable("category") String category, @MatrixVariable(pathVar="price") Map<String, List<String>> filterparms, @RequestParam("manufacturer") String manufacturer) {
 		model.addAttribute("products", productService.getProductsByManufaturer(category, filterparms, manufacturer));

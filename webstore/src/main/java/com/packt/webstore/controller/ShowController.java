@@ -15,8 +15,8 @@ import com.packt.webstore.service.IShowService;
 @RequestMapping(value="/show", produces=MediaType.APPLICATION_JSON_VALUE)
 public class ShowController {
 	
-	// @Autowired
-	// private IShowService showService;
+	@Autowired
+	private IShowService showService;
 	
 	@RequestMapping("/list")
 	public List<Show> listshows() {
@@ -26,14 +26,9 @@ public class ShowController {
 		return list;
 	}
 	
-	@RequestMapping("/show")
+	@RequestMapping("/get")
 	public Show getshow() {
 		return new Show("Game of Thrones", "Sci-fi");
-	}
-	
-	@RequestMapping("/test")
-	public String test() {
-		return "test";
 	}
 	
 	
