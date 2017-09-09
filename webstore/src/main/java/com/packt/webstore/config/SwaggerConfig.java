@@ -14,8 +14,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {                                    
     @Bean
     public Docket api() { 
-    	System.out.println("<<<<<<<<<<<< YESSSS >>>>>>>>>>>>");
-    	
         return new Docket(DocumentationType.SWAGGER_2)  
           .select()                                  
           .apis(RequestHandlerSelectors.basePackage("com.packt.webstore.controller.rest"))              
@@ -25,7 +23,8 @@ public class SwaggerConfig {
     }
     
     private ApiInfo apiInfo() {
-        ApiInfo apiInfo = new ApiInfo(
+        @SuppressWarnings("deprecation")
+		ApiInfo apiInfo = new ApiInfo(
           "My REST API",
           "Some custom description of API.",
           "API TOS",

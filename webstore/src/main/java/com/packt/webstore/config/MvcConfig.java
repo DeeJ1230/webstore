@@ -15,8 +15,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		System.out.println("<<<<<<<<<< Alllsssooooo >>>>>>>>><");
-		
 	    registry.addResourceHandler("swagger-ui.html")
 	      .addResourceLocations("classpath:/META-INF/resources/");
 	 
