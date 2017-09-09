@@ -64,12 +64,14 @@ public class ProductController {
 	public String getAddNewProductForm(Model model) {
 		Product newProduct = new Product();
 		model.addAttribute("newProduct", newProduct);
+		System.out.println("getAddNewProductForm");
 		return "addProduct";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct) {
 		productService.addProduct(newProduct);
+		System.out.println("processAddNewProductForm");
 		return "redirect:/products";
 	}
 }
