@@ -12,4 +12,5 @@ public interface IProductService {
 	Product getProductById(String productId);
 	Set<Product> getProductsByFilter(Map<String,List<String>> filterparms);
 	List<Product> getProductsByManufaturer(String category, Map<String,List<String>> filterparms, String manufacturer);
+	void addProduct(Product product);
 }

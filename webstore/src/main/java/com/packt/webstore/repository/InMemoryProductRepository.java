@@ -106,4 +106,9 @@ public class InMemoryProductRepository implements IProductRepository {
 	public List<Product> getAllProducts() {
 		return listOfProducts;
 	}
+
+	@Override
+	public void addProduct(Product product) {
+		listOfProducts.add(product);
+	}
 }
