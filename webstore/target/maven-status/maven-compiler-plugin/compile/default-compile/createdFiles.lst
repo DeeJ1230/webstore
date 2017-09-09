@@ -17,6 +17,6 @@ com/packt/webstore/controller/HomeController.class
 com/packt/webstore/repository/ICustomerRepository.class
 com/packt/webstore/controller/ProductController.class
 com/packt/webstore/service/OrderServiceImpl.class
-com/packt/webstore/config/MvcConfig.class
 com/packt/webstore/service/ProductService.class
+com/packt/webstore/config/MvcConfig.class
 com/packt/webstore/repository/InMemoryProductRepository.class
