@@ -5,6 +5,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +25,11 @@ public class ProductController {
 	@Autowired
 	private IProductService productService;
 
+	@InitBinder
+	public void initializeBinder(WebDataBinder binder) {
+		binder.setDisallowedFields("unitsInOrder", "discontinued");
+	}
+	
 	@RequestMapping
 	public String list(Model model) {
 		model.addAttribute("products", productService.listAllProducts());
@@ -64,13 +73,16 @@ public class ProductController {
 	public String getAddNewProductForm(Model model) {
 		Product newProduct = new Product();
 		model.addAttribute("newProduct", newProduct);
-		System.out.println("getAddNewProductForm");
 		return "addProduct";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct) {
-		productService.addProduct(newProduct);
+	public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct, BindingResult result) {
+		String[] supressedFields = result.getSuppressedFields();
+		if (supressedFields.length > 0) {
+			throw new RuntimeException("Attempting to bind disallowed fields: " + StringUtils.arrayToCommaDelimitedString(supressedFields));
+		}
+		
 		System.out.println("processAddNewProductForm");
 		return "redirect:/products";
 	}

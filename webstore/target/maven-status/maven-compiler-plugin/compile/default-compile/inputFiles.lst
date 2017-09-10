@@ -2,6 +2,7 @@
 /home/dan/git/webstore/webstore/src/main/java/com/packt/webstore/model/Show.java
 /home/dan/git/webstore/webstore/src/main/java/com/packt/webstore/repository/ICustomerRepository.java
 /home/dan/git/webstore/webstore/src/main/java/com/packt/webstore/repository/InMemoryCustomerRepository.java
+/home/dan/git/webstore/webstore/src/main/java/com/packt/webstore/controller/LoginController.java
 /home/dan/git/webstore/webstore/src/main/java/com/packt/webstore/controller/CustomerController.java
 /home/dan/git/webstore/webstore/src/main/java/com/packt/webstore/config/DataConfig.java
 /home/dan/git/webstore/webstore/src/main/java/com/packt/webstore/service/IProductService.java
