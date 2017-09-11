@@ -83,7 +83,7 @@ public class ProductController {
 			throw new RuntimeException("Attempting to bind disallowed fields: " + StringUtils.arrayToCommaDelimitedString(supressedFields));
 		}
 		
-		System.out.println("processAddNewProductForm");
+		productService.addProduct(newProduct);
 		return "redirect:/products";
 	}
 }
