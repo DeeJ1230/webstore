@@ -1,7 +1,11 @@
 package com.packt.webstore.controller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.packt.webstore.domain.Product;
 import com.packt.webstore.service.IProductService;
@@ -27,9 +32,11 @@ public class ProductController {
 
 	@InitBinder
 	public void initializeBinder(WebDataBinder binder) {
-		binder.setDisallowedFields("unitsInOrder", "discontinued");
+		binder.setAllowedFields("productId", "name", "unitPrice", "description", "manufacturer", "category",
+				"unitsInStock", "condition", "productImage");
+//		binder.setDisallowedFields("unitsInOrder", "discontinued");
 	}
-	
+
 	@RequestMapping
 	public String list(Model model) {
 		model.addAttribute("products", productService.listAllProducts());
@@ -77,10 +84,26 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct, BindingResult result) {
+	public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct, BindingResult result,
+			HttpServletRequest request) {
 		String[] supressedFields = result.getSuppressedFields();
 		if (supressedFields.length > 0) {
-			throw new RuntimeException("Attempting to bind disallowed fields: " + StringUtils.arrayToCommaDelimitedString(supressedFields));
+			throw new RuntimeException("Attempting to bind disallowed fields: "
+					+ StringUtils.arrayToCommaDelimitedString(supressedFields));
+		}
+
+		MultipartFile productImage = newProduct.getProductImage();
+		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+
+		if (productImage != null && !productImage.isEmpty()) {
+			try {
+				System.out.println(rootDirectory + "resources/images/" + newProduct.getProductId() + ".jpg");
+				System.out.println(rootDirectory);
+				productImage.transferTo(
+						new File(rootDirectory + "resources/images/" + newProduct.getProductId() + ".jpg"));
+			} catch (Exception e) {
+				throw new RuntimeException("Product Image saving failed", e);
+			}
 		}
 		
 		productService.addProduct(newProduct);

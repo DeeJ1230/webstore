@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <html>
 <head>
@@ -29,6 +29,9 @@
 			<c:forEach items="${products}" var="product">
 				<div class="col-sm-6 col-md-3" style="padding-bottom: 15 px">
 					<div class="thumbnail">
+						<img src="<c:url 
+value="/resource/images/${product.productId}.jpg"></c:url>"
+alt="image" style = "width:35%"/>
 						<div class="caption">
 							<h3>${product.name}</h3>
 							<p>${product.manufacturer}</p>
@@ -36,7 +39,8 @@
 							<p>${product.unitPrice}USD</p>
 							<p>Available ${product.unitsInStock} units in stock</p>
 							<p>
-								<a href="<spring:url value="/products/product?id=${product.productId}" />"
+								<a
+									href="<spring:url value="/products/product?id=${product.productId}" />"
 									class="btn btn-primary"> <span
 									class="glyphicon-hand-left glyphicon"></span> Details
 								</a>
