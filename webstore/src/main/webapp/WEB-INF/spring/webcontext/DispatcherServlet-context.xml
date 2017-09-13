@@ -54,4 +54,8 @@
 	</bean>
 
 	<mvc:resources location="/resources/" mapping="/resource/**" />
+
+	<mvc:interceptors>
+		<bean class="com.packt.webstore.interceptor.PerformanceMonitorInterceptor" />
+	</mvc:interceptors>
 </beans>
