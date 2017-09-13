@@ -11,6 +11,7 @@ import java.util.Set;
 import org.springframework.stereotype.Repository;
 
 import com.packt.webstore.domain.Product;
+import com.packt.webstore.exception.ProductNotFoundException;
 
 @Repository
 public class InMemoryProductRepository implements IProductRepository {
@@ -45,14 +46,15 @@ public class InMemoryProductRepository implements IProductRepository {
 	public List<Product> getProductsByManufaturer(String category, Map<String, List<String>> filterparms,
 			String manufacturer) {
 		List<Product> result = new ArrayList<>();
-		
+
 		for (Product product : getProductsByCategory(category)) {
 			if (product.getManufacturer().equalsIgnoreCase(manufacturer)) {
-				if (product.getUnitPrice().compareTo(new BigDecimal(filterparms.get("low").get(0))) == 1 & product.getUnitPrice().compareTo(new BigDecimal(filterparms.get("high").get(0))) == -1)
+				if (product.getUnitPrice().compareTo(new BigDecimal(filterparms.get("low").get(0))) == 1
+						& product.getUnitPrice().compareTo(new BigDecimal(filterparms.get("high").get(0))) == -1)
 					result.add(product);
 			}
 		}
-		
+
 		return result;
 	}
 
@@ -95,11 +97,20 @@ public class InMemoryProductRepository implements IProductRepository {
 
 	@Override
 	public Product getProductById(String productId) {
-		for (Product product : listOfProducts) {
-			if (product.getProductId().equals(productId))
-				return product;
+		Product productById = null;
+		
+		for(Product product : listOfProducts) {
+			if (product != null && product.getProductId() != null && product.getProductId().equals(productId)) {
+				productById = product;
+				break;
+			}
 		}
-		throw new IllegalArgumentException("No products found with the Id: " + productId);
+		
+		if(productById == null){
+			throw new ProductNotFoundException("No products found with the product id: "+ productId);
+		}
+		
+		return productById;
 	}
 
 	@Override

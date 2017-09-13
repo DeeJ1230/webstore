@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,8 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.packt.webstore.domain.Product;
+import com.packt.webstore.exception.NoProductsFoundUnderCategoryException;
+import com.packt.webstore.exception.ProductNotFoundException;
 import com.packt.webstore.service.IProductService;
 
 @Controller
@@ -34,7 +38,7 @@ public class ProductController {
 	public void initializeBinder(WebDataBinder binder) {
 		binder.setAllowedFields("productId", "name", "unitPrice", "description", "manufacturer", "category",
 				"unitsInStock", "condition", "productImage");
-//		binder.setDisallowedFields("unitsInOrder", "discontinued");
+		// binder.setDisallowedFields("unitsInOrder", "discontinued");
 	}
 
 	@RequestMapping
@@ -59,7 +63,13 @@ public class ProductController {
 
 	@RequestMapping("/{category}")
 	public String allProductsByCategory(Model model, @PathVariable("category") String category) {
-		model.addAttribute("products", productService.listProductsByCategory(category));
+		List<Product> products = productService.listProductsByCategory(category);
+
+		if (products == null || products.isEmpty()) {
+			throw new NoProductsFoundUnderCategoryException();
+		}
+
+		model.addAttribute("products", products);
 		return "products";
 	}
 
@@ -72,7 +82,8 @@ public class ProductController {
 
 	@RequestMapping("/product")
 	public String getProductById(@RequestParam("id") String productId, Model model) {
-		model.addAttribute("product", productService.getProductById(productId));
+		Product product = productService.getProductById(productId);
+		model.addAttribute("product", product);
 		return "product";
 	}
 
@@ -99,14 +110,24 @@ public class ProductController {
 			try {
 				System.out.println(rootDirectory + "resources/images/" + newProduct.getProductId() + ".jpg");
 				System.out.println(rootDirectory);
-				productImage.transferTo(
-						new File(rootDirectory + "resources/images/" + newProduct.getProductId() + ".jpg"));
+				productImage
+						.transferTo(new File(rootDirectory + "resources/images/" + newProduct.getProductId() + ".jpg"));
 			} catch (Exception e) {
 				throw new RuntimeException("Product Image saving failed", e);
 			}
 		}
-		
+
 		productService.addProduct(newProduct);
 		return "redirect:/products";
+	}
+
+	@ExceptionHandler(ProductNotFoundException.class)
+	public ModelAndView handleError(HttpServletRequest req, ProductNotFoundException exception) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("invalidProductId", exception.getProductId());
+		mav.addObject("exception", exception);
+		mav.addObject("url", req.getRequestURL() + "?" + req.getQueryString());
+		mav.setViewName("productNotFound");
+		return mav;
 	}
 }

@@ -13,8 +13,10 @@ com/packt/webstore/repository/InMemoryProductRepository.class
 com/packt/webstore/config/SwaggerConfig.class
 com/packt/webstore/service/IShowService.class
 com/packt/webstore/domain/Product.class
+com/packt/webstore/exception/ProductNotFoundException.class
 com/packt/webstore/repository/InMemoryCustomerRepository.class
 com/packt/webstore/controller/LoginController.class
+com/packt/webstore/exception/NoProductsFoundUnderCategoryException.class
 com/packt/webstore/model/Show.class
 com/packt/webstore/service/CustomerServiceImpl.class
 com/packt/webstore/controller/ProductController.class
