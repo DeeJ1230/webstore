@@ -2,6 +2,7 @@ com/packt/webstore/controller/rest/ShowController.class
 com/packt/webstore/controller/OrderController.class
 com/packt/webstore/service/ICustomerService.class
 com/packt/webstore/controller/CustomerController.class
+com/packt/webstore/interceptor/PerformanceMonitorInterceptor.class
 com/packt/webstore/config/DataConfig.class
 com/packt/webstore/service/IOrderService.class
 com/packt/webstore/service/IProductService.class

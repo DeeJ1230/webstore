@@ -18,11 +18,14 @@ public class HomeController {
 
 	@Value("${environment}")
 	private String environment;
+	
+	@Value("${dan}")
+	private int dan;
 
 	@RequestMapping("/")
 	public String welcome(Model model) {
 //		model.addAttribute("greeting", "Welcome to Web store, " + env.getProperty("name") + "!");
-		model.addAttribute("greeting", "Welcome to Web store, " + environment + "!");
+		model.addAttribute("greeting", "Welcome to Web store, " + name + "! (" + dan + ")");
 		model.addAttribute("tagline", "The one and only");
 
 		return "welcome";

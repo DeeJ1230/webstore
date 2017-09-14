@@ -5,6 +5,7 @@
 /home/dan/git/webstore/webstore/src/main/java/com/packt/webstore/service/IProductService.java
 /home/dan/git/webstore/webstore/src/main/java/com/packt/webstore/controller/rest/ShowController.java
 /home/dan/git/webstore/webstore/src/main/java/com/packt/webstore/service/OrderServiceImpl.java
+/home/dan/git/webstore/webstore/src/main/java/com/packt/webstore/interceptor/PerformanceMonitorInterceptor.java
 /home/dan/git/webstore/webstore/src/main/java/com/packt/webstore/repository/IProductRepository.java
 /home/dan/git/webstore/webstore/src/main/java/com/packt/webstore/controller/HomeController.java
 /home/dan/git/webstore/webstore/src/main/java/com/packt/webstore/service/ICustomerService.java
