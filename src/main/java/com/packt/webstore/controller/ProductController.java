@@ -31,7 +31,6 @@ import com.packt.webstore.service.IProductService;
 @Controller
 @RequestMapping("/products")
 public class ProductController {
-	
 	@Autowired
 	private IProductService productService;
 
