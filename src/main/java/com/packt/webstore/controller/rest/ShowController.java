@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.packt.webstore.model.Show;
@@ -24,7 +25,7 @@ public class ShowController {
 //		return list;
 //	}
 	
-	@RequestMapping("/get")
+	@RequestMapping(value="/get", method=RequestMethod.GET)
 	public Show getshow() {
 		return new Show("Game of Thrones", "Sci-fi");
 	}

@@ -14,11 +14,11 @@
 
 			<a href="<c:url value="/j_spring_security_logout" />"
 				class="btn btn-danger btn-mini pull-right">logout</a>
-				
+
 			<div class="pull-right" style="padding-right: 50px">
 				<a href="?language=en">English</a>|<a href="?language=nl">Dutch</a>
 			</div>
-			
+
 			<div class="container">
 				<h1>Products</h1>
 				<p>Add products</p>
@@ -29,6 +29,8 @@
 	<section class="container">
 		<form:form modelAttribute="newProduct" class="form-horizontal"
 			enctype="multipart/form-data">
+			<form:errors path="*" cssClass="alert alert-danger" element="div" />
+			
 			<fieldset>
 				<legend>Add new product</legend>
 				<div class="form-group">
@@ -37,6 +39,7 @@
 					<div class="col-lg-10">
 						<form:input id="productId" path="productId" type="text"
 							class="form:input-large" />
+						<form:errors path="productId" cssClass="text-danger" />
 					</div>
 				</div>
 
@@ -45,6 +48,7 @@
 					<div class="col-lg-10">
 						<form:input id="name" path="name" type="text"
 							class="form:input-large" />
+						<form:errors path="name" cssClass="text-danger" />
 					</div>
 				</div>
 
@@ -54,6 +58,7 @@
 					<div class="col-lg-10">
 						<form:input id="unitPrice" path="unitPrice" type="text"
 							class="form:input-large" />
+						<form:errors path="unitPrice" cssClass="text-danger" />
 					</div>
 				</div>
 

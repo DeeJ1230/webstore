@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,19 +28,25 @@ import com.packt.webstore.domain.Product;
 import com.packt.webstore.exception.NoProductsFoundUnderCategoryException;
 import com.packt.webstore.exception.ProductNotFoundException;
 import com.packt.webstore.service.IProductService;
+import com.packt.webstore.validator.UnitsInStockValidator;
 
 @Controller
 @RequestMapping("/products")
 public class ProductController {
-	
+
 	@Autowired
 	private IProductService productService;
+
+	@Autowired
+	private UnitsInStockValidator unitsInStockValidator;
 
 	@InitBinder
 	public void initializeBinder(WebDataBinder binder) {
 		binder.setAllowedFields("productId", "name", "unitPrice", "description", "manufacturer", "category",
 				"unitsInStock", "condition", "productImage", "language");
 		// binder.setDisallowedFields("unitsInOrder", "discontinued");
+
+		binder.setValidator(unitsInStockValidator);
 	}
 
 	@RequestMapping
@@ -96,8 +103,13 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct, BindingResult result,
-			HttpServletRequest request) {
+	public String processAddNewProductForm(@ModelAttribute("newProduct") @Valid Product newProduct,
+			BindingResult result, HttpServletRequest request) {
+
+		if (result.hasErrors()) {
+			return "addProduct";
+		}
+
 		String[] supressedFields = result.getSuppressedFields();
 		if (supressedFields.length > 0) {
 			throw new RuntimeException("Attempting to bind disallowed fields: "
@@ -120,6 +132,11 @@ public class ProductController {
 
 		productService.addProduct(newProduct);
 		return "redirect:/products";
+	}
+
+	@RequestMapping("/invalidPromoCode")
+	public String invalidPromoCode() {
+		return "invalidPromoCode";
 	}
 
 	@ExceptionHandler(ProductNotFoundException.class)
