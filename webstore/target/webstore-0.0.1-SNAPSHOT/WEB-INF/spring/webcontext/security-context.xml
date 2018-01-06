@@ -23,8 +23,6 @@ http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 			<security:user-service>
 				<security:user name="Admin" password="Admin123"
 					authorities="ROLE_ADMIN" />
-				<security:user name="dan" password="dan"
-					authorities="ROLE_ADMIN" />
 			</security:user-service>
 		</security:authentication-provider>
 	</security:authentication-manager>
