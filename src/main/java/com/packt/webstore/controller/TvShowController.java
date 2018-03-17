@@ -1,34 +1,29 @@
-package com.packt.webstore.controller.rest;
+package com.packt.webstore.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.packt.webstore.model.Show;
+import com.packt.webstore.service.ITvShowService;
 
-@RestController
-@RequestMapping(value="/show", produces=MediaType.APPLICATION_JSON_VALUE)
-public class ShowController {
-	
-//	@Autowired
-//	private IShowService showService;
-	
-//	@RequestMapping("/list")
-//	public List<Show> listshows() {
-//		ArrayList<Show> list = new ArrayList<>();
-//		list.add(new Show("The Mist", "Sci-fi"));
-//		list.add(new Show("Game of Thrones", "Sci-fi"));
-//		return list;
-//	}
-	
-	@RequestMapping(value="/get", method=RequestMethod.GET)
-	public Show getshow() {
-		return new Show("Game of Thrones", "Sci-fi");
+@Controller
+@RequestMapping(value = "/tvshows")
+public class TvShowController {
+
+	@Autowired
+	private ITvShowService tvShowService;
+
+	@RequestMapping
+	public String list(Model model) {
+		model.addAttribute("tvshows", tvShowService.listAllTvShows());
+		return "tvshows";
 	}
-	
-	
+
+	@RequestMapping("/{id}")
+	public String getTvShow(Model model, @PathVariable("id") int id) {
+		model.addAttribute("tvshow", tvShowService.getTvShows(id));
+		return "tvshow";
+	}
 }

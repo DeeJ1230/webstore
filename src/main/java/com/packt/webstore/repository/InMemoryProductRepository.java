@@ -1,7 +1,6 @@
 package com.packt.webstore.repository;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -24,6 +23,18 @@ public class InMemoryProductRepository implements IProductRepository {
 		iphone.setManufacturer("Apple");
 		iphone.setUnitsInStock(800);
 
+		Product iphone2 = new Product("P1234", "iPhone 5s", new BigDecimal(500));
+		iphone.setDescription("Apple iPhone 5s smartphone with 4.00-inch 640x1136 display and 8-megapixel rear camera");
+		iphone.setCategory("Smart Phone");
+		iphone.setManufacturer("Apple");
+		iphone.setUnitsInStock(800);
+
+		Product iphone3 = new Product("P1234", "iPhone 5s", new BigDecimal(500));
+		iphone.setDescription("Apple iPhone 5s smartphone with 4.00-inch 640x1136 display and 8-megapixel rear camera");
+		iphone.setCategory("Smart Phone");
+		iphone.setManufacturer("Apple");
+		iphone.setUnitsInStock(800);
+
 		Product laptop_dell = new Product("P1235", "Dell Inspiron", new BigDecimal(700));
 		laptop_dell.setDescription("Dell Inspiron 14-inch Laptop (Black) with 3rd Generation Intel Core processors");
 		laptop_dell.setCategory("Laptop");
@@ -37,9 +48,27 @@ public class InMemoryProductRepository implements IProductRepository {
 		tablet_Nexus.setManufacturer("Google");
 		tablet_Nexus.setUnitsInStock(1000);
 
+		Product tablet_Nexus1 = new Product("P1236", "Nexus 7", new BigDecimal(300));
+		tablet_Nexus.setDescription(
+				"Google Nexus 7 is the lightest 7 inch tablet With a quad-core Qualcomm SnapdragonTM S4 Pro processor");
+		tablet_Nexus.setCategory("Tablet");
+		tablet_Nexus.setManufacturer("Google");
+		tablet_Nexus.setUnitsInStock(1000);
+
+		Product tablet_Nexus2 = new Product("P1236", "Nexus 7", new BigDecimal(300));
+		tablet_Nexus.setDescription(
+				"Google Nexus 7 is the lightest 7 inch tablet With a quad-core Qualcomm SnapdragonTM S4 Pro processor");
+		tablet_Nexus.setCategory("Tablet");
+		tablet_Nexus.setManufacturer("Google");
+		tablet_Nexus.setUnitsInStock(1000);
+
 		listOfProducts.add(iphone);
+		listOfProducts.add(iphone2);
+		listOfProducts.add(iphone3);
 		listOfProducts.add(laptop_dell);
 		listOfProducts.add(tablet_Nexus);
+		listOfProducts.add(tablet_Nexus1);
+		listOfProducts.add(tablet_Nexus2);
 	}
 
 	@Override
@@ -98,18 +127,18 @@ public class InMemoryProductRepository implements IProductRepository {
 	@Override
 	public Product getProductById(String productId) {
 		Product productById = null;
-		
-		for(Product product : listOfProducts) {
+
+		for (Product product : listOfProducts) {
 			if (product != null && product.getProductId() != null && product.getProductId().equals(productId)) {
 				productById = product;
 				break;
 			}
 		}
-		
-		if(productById == null){
-			throw new ProductNotFoundException("No products found with the product id: "+ productId);
+
+		if (productById == null) {
+			throw new ProductNotFoundException("No products found with the product id: " + productId);
 		}
-		
+
 		return productById;
 	}
 

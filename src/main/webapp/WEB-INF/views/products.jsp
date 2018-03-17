@@ -18,8 +18,8 @@
 	<section>
 		<div class="jumbotron">
 			<div class="container">
-				<h1>Products</h1>
-				<p>All the available products in our store</p>
+				<h1>Series</h1>
+				<p>All the available series</p>
 			</div>
 		</div>
 	</section>
@@ -27,11 +27,12 @@
 	<section class="container">
 		<div class="row">
 			<c:forEach items="${products}" var="product">
-				<div class="col-sm-6 col-md-3" style="padding-bottom: 15 px">
+				<div class="col-md-12 col-md-12" style="padding-bottom: 15 px">
+<!-- 				<div class="col-sm-6 col-md-3" style="padding-bottom: 15 px"> -->
 					<div class="thumbnail">
 						<img src="<c:url 
 value="/resource/images/${product.productId}.jpg"></c:url>"
-alt="image" style = "width:35%"/>
+alt="image" style = "width:5%"/>
 						<div class="caption">
 							<h3>${product.name}</h3>
 							<p>${product.manufacturer}</p>

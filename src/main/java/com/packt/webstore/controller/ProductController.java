@@ -29,7 +29,6 @@ import com.packt.webstore.exception.NoProductsFoundUnderCategoryException;
 import com.packt.webstore.exception.ProductNotFoundException;
 import com.packt.webstore.service.IProductService;
 import com.packt.webstore.validator.ProductValidator;
-import com.packt.webstore.validator.UnitsInStockValidator;
 
 @Controller
 @RequestMapping("/products")
@@ -47,7 +46,7 @@ public class ProductController {
 				"unitsInStock", "condition", "productImage", "language");
 		// binder.setDisallowedFields("unitsInOrder", "discontinued");
 
-		//binder.setValidator(productValidator);
+		// binder.setValidator(productValidator);
 	}
 
 	@RequestMapping
