@@ -19,7 +19,7 @@ public class TvShowRepository implements ITvShowRepository {
 
 	@Override
 	public List<TvShow> getAllTvShows() {
-		final String fooResourceUrl = "http://192.168.0.9:8081/tvshow/titel/the";
+		final String fooResourceUrl = "http://192.168.0.35:8081/tvshow/titel/the";
 
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<List<TvShow>> response = null;
@@ -41,7 +41,7 @@ public class TvShowRepository implements ITvShowRepository {
 	@Override
 	public TvShow getTvShow(int id) {
 
-		final String fooResourceUrl = "http://192.168.0.9:8081/tvshow/" + id;
+		final String fooResourceUrl = "http://192.168.0.35:8081/tvshow/" + id;
 
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<TvShow> response = null;
