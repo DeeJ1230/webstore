@@ -1,3 +1,3 @@
 #!/usr/bin/env groovy
 
-deployPipeline("devops", "0.1")
+deployPipeline("webstore", "0.1")
