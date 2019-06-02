@@ -1,0 +1,3 @@
+#!/usr/bin/env groovy
+
+standardPipeline("devops", "0.1")
